@@ -31,7 +31,7 @@ app.post('/',(req, res) => {
             let pokemonImage = `https://img.pokemondb.net/artwork/large/${pokemonName}.jpg`
             console.log(pokemonImage);
 
-            res.write("<img src=" +pokemonImage + ">")
+            res.write(`<img src=${pokemonImage}>`)
             res.send();
         })
     })
