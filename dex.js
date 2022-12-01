@@ -8,6 +8,12 @@ app.use(express.urlencoded({extended:true}));
 
 
 
+let pokemon = {
+    info:'',
+    name:'',
+    image:''
+}
+
 app.get('/',(req,res) => {
     res.sendFile(__dirname + '/index.html');
 });
@@ -27,10 +33,11 @@ app.post('/',(req, res) => {
         });
 
         response.on('end', () =>{
-            let pokemonInfo = JSON.parse(responseData);
-            let pokemonName = pokemonInfo.name;
-            let pokemonImage = `https://img.pokemondb.net/artwork/large/${pokemonName}.jpg`
-            res.write(`<img src=${pokemonImage}>`)
+            pokemon.info = JSON.parse(responseData);
+            pokemon.name = pokemon.info.name;
+            pokemon.image = `https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`
+            console.log(pokemon.name);
+            res.write(`<img src=${pokemon.image}>`)
             res.send();
         });
     });
